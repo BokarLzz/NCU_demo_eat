@@ -28,7 +28,7 @@ CREATE TABLE restaurant (
     address VARCHAR(255) COMMENT '店家地址',
     business_hours VARCHAR(100) COMMENT '店家營業時間',
     manager VARCHAR(50) COMMENT '店家負責人',
-	manager_email VARCHAR(100) COMMENT '店家負責人電子郵件'
+	manager_email VARCHAR(100) COMMENT '店家負責人電子郵件',
     icon VARCHAR(255) COMMENT '店家圖示（URL）',
     username VARCHAR(50) COMMENT '對應用戶帳號（FK）',
     FOREIGN KEY (username) REFERENCES user_table(username)
