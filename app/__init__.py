@@ -46,7 +46,7 @@ def create_database(app):
     db_uri = app.config['SQLALCHEMY_DATABASE_URI']
     db_name = db_uri.split('/')[-1]
     connection_uri = '/'.join(db_uri.split('/')[:-1])
-    connection = pymysql.connect(host='mysql-1.cfg8ygkqmlab.ap-northeast-3.rds.amazonaws.com', user='admin', password='a73291234db')
+    connection = pymysql.connect(host='ncu-eat-database.crwumga42gwx.ap-southeast-2.rds.amazonaws.com', user='admin', password='a73291234db')
     #connection = pymysql.connect(host='localhost', user='root', password='')
     cursor = connection.cursor()
     cursor.execute(f"CREATE DATABASE IF NOT EXISTS {db_name} DEFAULT CHARACTER SET = 'utf8mb4'")
