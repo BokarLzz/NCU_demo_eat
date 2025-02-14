@@ -1,0 +1,76 @@
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCU Campus Eats | 個人資料</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='customers/view_pf.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='customers/navbar.css') }}">
+</head>
+<body>
+    <!-- 頂部導航欄 -->
+    <header class="navbar">
+        <!-- 左側LOGO和標題 -->
+        <a href="{{ url_for('menus.view_store') }}" class="logo">
+            <img src="{{ url_for('static', filename='images/NCUlogo.png') }}" alt="LOGO">
+            <span>NCU Campus Eats | 個人資料</span>
+        </a>
+
+        <!-- 右側按鈕與下拉選單 -->
+        <div class="menu">
+            <a href="{{ url_for('carts.view_cart') }}">
+                <button class="cart-button">
+                    <img src="{{ url_for('static', filename='images/cart.png') }}" alt="Cart">
+                </button>
+            </a>
+            <div class="dropdown">
+                <img src="{{ url_for('static',filename='images/customer.png') }}" alt="Photo"> <!-- 替換為使用者Icon的URL -->
+                <span>{{ customer_name }}</span>
+                <div class="dropdown-menu">
+                    <a href="{{ url_for('orders.view_order') }}">歷史訂單</a>
+                    <a href="{{ url_for('auth.view_pf') }}">修改個人資料</a>
+                    <a href="{{ url_for('auth.change_password') }}">修改密碼</a>
+                    <a href="{{ url_for('auth.logout') }}">登出</a>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+    <div class="container">
+        <h2>修改個人資訊</h2>
+        <form action="{{ url_for('auth.edit_profile') }}" method="post" onsubmit="return confirmEditProfile()">
+            <label for="name">姓名：</label>
+            <input type="text" id="name" name="name" placeholder="姓名" value="{{ customer_pf['name'] }}" required>
+    
+            <label for="phone">電話：</label>
+            <input type="text" id="phone" name="phone" placeholder="電話 (請輸入十位數字)" pattern="\d{10}" value="{{ customer_pf['phone'] }}" required>
+    
+            <label for="email">電子郵件：</label>
+            <input type="email" id="email" name="email" placeholder="電子郵件" value="{{ customer_pf['email'] }}" required>
+    
+            <button type="submit" class="btn-submit">修改</button>
+        </form>
+    </div>
+
+    {% with messages = get_flashed_messages(category_filter=["edit_profile_success", "edit_profile_error"], with_categories=True) %}
+        {% if messages %}
+            <script>
+                const messages = JSON.parse('{{ messages | tojson | safe }}');
+                messages.forEach(([category, message]) => {
+                    alert(message);
+                });
+            </script>
+        {% endif %}
+    {% endwith %}
+
+
+
+    <script>
+        // 確認修改個人資料的函數
+        function confirmEditProfile() {
+            return confirm("您確定要修改您的個人資料嗎？");
+        }
+    </script>
+
+</body>
+</html>
