@@ -16,7 +16,7 @@ class Config:
     TOKEN_URL = 'https://portal.ncu.edu.tw/oauth2/token'
     USER_INFO_URL = 'https://portal.ncu.edu.tw/apis/oauth/v1/info'
     #REDIRECT_URI = 'http://localhost:5000/customers/callback'  # 回調 URL
-    REDIRECT_URI = 'http://3.106.242.116:5000/customers/callback'  # AWS
+    REDIRECT_URI = 'http://3.106.242.116/customers/callback'  # AWS
     SCOPE = 'id identifier chinese-name email mobile-phone personal-id'
 
     # Flask-Mail 設定
